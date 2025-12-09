@@ -8,12 +8,15 @@ import AgoraRTC, {
   IMicrophoneAudioTrack,
   IRemoteVideoTrack,
   IRemoteAudioTrack,
-  IRemoteUser,
+  IAgoraRTCRemoteUser,
 } from "agora-rtc-sdk-ng";
 
 const APP_ID = process.env.NEXT_PUBLIC_AGORA_APP_ID!;
 
-type RemoteUserWithTracks = IRemoteUser & {
+type RemoteUserWithTracks = Omit<
+  IAgoraRTCRemoteUser,
+  "videoTrack" | "audioTrack"
+> & {
   videoTrack?: IRemoteVideoTrack | null;
   audioTrack?: IRemoteAudioTrack | null;
 };
